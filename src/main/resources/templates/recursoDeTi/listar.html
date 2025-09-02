@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Recursos de TI - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                <span>
+                  Admin
+                  <span class="user-level">Administrador</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item">
+              <a href="administracao.html">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="configuracoes.html">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.html">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Recursos de TI</h4>
+            <div class="ms-auto">
+              <a th:href="@{/recurso-de-ti/criar}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Adicionar Novo Recurso de TI
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Lista de Recursos de TI</div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Título</th>
+                          <th>Descrição</th>
+                          <th>Categoria</th>
+                          <th>Ativo</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="recurso : ${recursos}">
+                          <td th:text="${recurso.titulo}"></td>
+                          <td th:text="${recurso.descricao}"></td>
+                          <td th:text="${recurso.categoria}"></td>
+                          <td>
+                            <span th:if="${recurso.ativo}" class="badge bg-success">Sim</span>
+                            <span th:unless="${recurso.ativo}" class="badge bg-danger">Não</span>
+                          </td>
+                          <td>
+                            <div class="d-flex">
+                              <a th:href="@{/recurso-de-ti/atualizar/{id}(id=${recurso.id})}"
+                                class="btn btn-sm btn-primary me-2">
+                                <i class="fas fa-edit"></i> Editar
+                              </a>
+                              <a href="#" class="btn btn-sm btn-danger"
+                                th:attr="onclick=|confirmarExclusao('${recurso.id}', '${recurso.titulo}')|">
+                                <i class="fas fa-trash"></i> Excluir
+                              </a>
+
+                            </div>
+                          </td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(recursos)}">
+                          <td colspan="6" class="text-center">Nenhum recurso de TI encontrado</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+
+  <!-- jQuery UI -->
+  <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+  <!-- Kaiadmin JS -->
+  <script src="assets/js/kaiadmin.min.js"></script>
+
+  <script>
+    function confirmarExclusao(id, titulo) {
+      swal({
+        title: 'Confirmar exclusão',
+        text: 'Deseja realmente excluir o recurso "' + titulo + '"?',
+        icon: 'warning',
+        buttons: {
+          cancel: {
+            text: 'Cancelar',
+            visible: true,
+            className: 'btn btn-secondary',
+            closeModal: true
+          },
+          confirm: {
+            text: 'Sim, excluir',
+            value: true,
+            visible: true,
+            className: 'btn btn-danger',
+            closeModal: true
+          }
+        }
+      }).then((value) => {
+        if (value) {
+          window.location.href = '/recurso-de-ti/excluir/' + id;
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>

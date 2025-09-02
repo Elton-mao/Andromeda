@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Administração - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script th:src="@{/assets/js/plugin/webfont/webfont.min.js}"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img th:src="@{/assets/img/profile.jpg}" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" th:href="@{#collapseExample}" aria-expanded="true">
+                <span>
+                  Usuário
+                  <span class="user-level" id="userRole">Cargo do Usuário</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary" id="menuSidebar">
+            <!-- Menu será carregado dinamicamente via JavaScript -->
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Configurações</h4>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Configurações do Perfil</div>
+                </div>
+                <div class="card-body">
+                  <form id="formConfiguracoes">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="nome">Nome Completo</label>
+                          <input type="text" class="form-control" id="nome" placeholder="Seu nome completo">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="email">E-mail</label>
+                          <input type="email" class="form-control" id="email" placeholder="seu.email@empresa.com">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="telefone">Telefone</label>
+                          <input type="tel" class="form-control" id="telefone" placeholder="(00) 00000-0000">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="setor">Setor</label>
+                          <input type="text" class="form-control" id="setor" readonly>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="separator-solid"></div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4 class="card-title">Alterar Senha</h4>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="senhaAtual">Senha Atual</label>
+                          <input type="password" class="form-control" id="senhaAtual">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="novaSenha">Nova Senha</label>
+                          <input type="password" class="form-control" id="novaSenha">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="confirmarSenha">Confirmar Nova Senha</label>
+                          <input type="password" class="form-control" id="confirmarSenha">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="separator-solid"></div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4 class="card-title">Preferências de Notificação</h4>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" checked>
+                            <span class="form-check-sign">Receber notificações por e-mail</span>
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" checked>
+                            <span class="form-check-sign">Receber notificações no sistema</span>
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="">
+                            <span class="form-check-sign">Receber resumo diário de atividades</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mt-4">
+                      <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        <button type="button" class="btn btn-danger" id="btnCancelar">Cancelar</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JS Files -->
+          <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+          <script th:src="@{/assets/js/core/popper.min.js}"></script>
+          <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+
+          <!-- jQuery UI -->
+          <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+          <script th:src="@{/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+
+          <!-- jQuery Scrollbar -->
+          <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+          <!-- Datatables -->
+          <script th:src="@{/assets/js/plugin/datatables/datatables.min.js}"></script>
+
+          <!-- Sweet Alert -->
+          <script th:src="@{/assets/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+          <!-- Kaiadmin JS -->
+          <script th:src="@{/assets/js/kaiadmin.min.js}"></script>
+
+  <script>
+    $(document).ready(function () {
+      // Máscara para telefone
+      $('#telefone').mask('(00) 00000-0000');
+
+      // Função para carregar menu baseado no perfil do usuário
+      function carregarMenu(perfil) {
+        let menuHTML = '';
+
+        switch (perfil) {
+          case 'gestor':
+            menuHTML = `
+                <li class="nav-item">
+                  <a href="dashboard-gestor.html">
+                    <i class="fas fa-home"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="nova-solicitacao.html">
+                    <i class="fas fa-plus-circle"></i>
+                    <p>Nova Solicitação</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="minhas-solicitacoes.html">
+                    <i class="fas fa-list"></i>
+                    <p>Minhas Solicitações</p>
+                  </a>
+                </li>`;
+            break;
+          case 'rh':
+            menuHTML = `
+                <li class="nav-item">
+                  <a href="painel-rh.html">
+                    <i class="fas fa-home"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="avaliar-solicitacao.html">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Avaliar Solicitações</p>
+                  </a>
+                </li>`;
+            break;
+          case 'diretor':
+            menuHTML = `
+                <li class="nav-item">
+                  <a href="painel-diretor.html">
+                    <i class="fas fa-home"></i>
+                    <p>Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="aprovar-solicitacao.html">
+                    <i class="fas fa-check-double"></i>
+                    <p>Aprovar Solicitações</p>
+                  </a>
+                </li>`;
+            break;
+        }
+
+        // Adiciona itens comuns do menu
+        menuHTML += `
+            <li class="nav-item active">
+              <a href="configuracoes.html">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.html">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>`;
+
+        $('#menuSidebar').html(menuHTML);
+      }
+
+      // Simula carregamento de dados do usuário
+      function carregarDadosUsuario() {
+        // Aqui você deve implementar a lógica para carregar os dados reais do usuário
+        const dadosUsuario = {
+          perfil: 'gestor', // Pode ser 'gestor', 'rh' ou 'diretor'
+          nome: 'João Silva',
+          email: 'joao.silva@empresa.com',
+          telefone: '(11) 98765-4321',
+          setor: 'TI'
+        };
+
+        $('#nome').val(dadosUsuario.nome);
+        $('#email').val(dadosUsuario.email);
+        $('#telefone').val(dadosUsuario.telefone);
+        $('#setor').val(dadosUsuario.setor);
+        $('#userRole').text(dadosUsuario.perfil.charAt(0).toUpperCase() + dadosUsuario.perfil.slice(1));
+
+        carregarMenu(dadosUsuario.perfil);
+      }
+
+      // Carrega dados iniciais
+      carregarDadosUsuario();
+
+      // Manipula envio do formulário
+      $('#formConfiguracoes').on('submit', function (e) {
+        e.preventDefault();
+
+        // Validação da alteração de senha
+        const senhaAtual = $('#senhaAtual').val();
+        const novaSenha = $('#novaSenha').val();
+        const confirmarSenha = $('#confirmarSenha').val();
+
+        if (senhaAtual && (novaSenha !== confirmarSenha)) {
+          swal({
+            title: 'Erro!',
+            text: 'As senhas não coincidem!',
+            icon: 'error',
+            buttons: {
+              confirm: {
+                text: 'OK',
+                className: 'btn btn-danger'
+              }
+            }
+          });
+          return;
+        }
+
+        // Simulação de salvamento
+        swal({
+          title: 'Sucesso!',
+          text: 'Configurações atualizadas com sucesso!',
+          icon: 'success',
+          buttons: {
+            confirm: {
+              text: 'OK',
+              className: 'btn btn-success'
+            }
+          }
+        });
+      });
+
+      // Botão Cancelar
+      $('#btnCancelar').click(function () {
+        window.history.back();
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Saindo... - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .logout-container {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        max-width: 400px;
+        width: 90%;
+      }
+      .spinner-border {
+        width: 3rem;
+        height: 3rem;
+        margin-bottom: 1rem;
+      }
+      .message {
+        font-size: 1.2rem;
+        color: #495057;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="logout-container">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <div class="message">Finalizando sua sessão...</div>
+      <div class="text-muted">Você será redirecionado em alguns segundos.</div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        // Simula o processo de logout
+        setTimeout(function() {
+          // Aqui você pode adicionar a lógica real de logout
+          // como limpar cookies, sessão, etc.
+          
+          // Redireciona para a página de login
+          window.location.href = 'index.html';
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

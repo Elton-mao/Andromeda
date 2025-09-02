@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Administração - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/plugins.min.css" />
+  <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                <span>
+                  Admin
+                  <span class="user-level">Administrador</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item active">
+              <a href="administracao.html">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="configuracoes.html">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.html">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Administração do Sistema</h4>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-round">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-icon">
+                      <div class="icon-big text-center icon-primary bubble-shadow-small">
+                        <i class="fas fa-users"></i>
+                      </div>
+                    </div>
+                    <div class="col col-stats ml-3 ml-sm-0">
+                      <div class="numbers">
+                        <p class="card-category">Total de Usuários</p>
+                        <h4 class="card-title" th:text="${adminDashboard.totalDeUsuarios}">48</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-round">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-icon">
+                      <div class="icon-big text-center icon-success bubble-shadow-small">
+                        <i class="fas fa-user-shield"></i>
+                      </div>
+                    </div>
+                    <div class="col col-stats ml-3 ml-sm-0">
+                      <div class="numbers">
+                        <p class="card-category">Perfis Ativos</p>
+                        <h4 class="card-title" th:text="${adminDashboard.perfisAtivos}">4</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-round">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-icon">
+                      <div class="icon-big text-center icon-info bubble-shadow-small">
+                        <i class="fas fa-clock"></i>
+                      </div>
+                    </div>
+                    <div class="col col-stats ml-3 ml-sm-0">
+                      <div class="numbers">
+                        <p class="card-category">Último Acesso Admin</p>
+                        <h4 class="card-title" th:text="${adminDashboard.ultimoAcessoAdmin}">17:45</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="card card-stats card-round">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-icon">
+                      <div class="icon-big text-center icon-danger bubble-shadow-small">
+                        <i class="fas fa-exclamation-triangle"></i>
+                      </div>
+                    </div>
+                    <div class="col col-stats ml-3 ml-sm-0">
+                      <div class="numbers">
+                        <p class="card-category">Erros de Login 24h</p>
+                        <h4 class="card-title" th:text="${adminDashboard.errosDeLogin}">3</h4>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <div class="card-title">Gerenciamento de Usuários</div>
+                  <a th:href="@{/usuarios}" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Usuário</a>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="tabelaUsuarios" class="display table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>E-mail</th>
+                          <th>Perfil</th>
+                          <th>Status</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="usuario : ${adminDashboard.usuarios}">
+                          <td th:text="${usuario.nomeCompleto}">João Silva</td>
+                          <td th:text="${usuario.email}">joao.silva@empresa.com</td>
+                          <td th:text="${usuario.perfilDeAcesso}">Gestor</td>
+                          <td>
+                            <span class="badge"
+                              th:classappend="${usuario.statusDoUsuario == 'ATIVO'} ? 'bg-danger ' : 'bg-success '"
+                              th:text="${usuario.statusDoUsuario}">
+                            </span>
+                          </td>
+                          <td>
+                              
+                            <a th:href="@{'usuarios/atualizar/' + ${usuario.id}}" class="btn btn-warning btn-sm">
+                              <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#"
+                            class="btn btn-danger btn-sm btn-bloquear-usuario"
+                            th:attr="data-url='/usuarios/bloquear/' + ${usuario.id} + '/BLOQUEADO'"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Bloquear usuário">
+                            <i class="fas fa-user-slash"></i>
+                          </a>
+                          </td>
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <div class="card-title">Gerenciamento de Perfis</div>
+                  <button class="btn btn-primary"><i class="fas fa-plus"></i> Novo Perfil</button>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="tabelaPerfis" class="display table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nome do Perfil</th>
+                          <!-- <th>Permissões</th>
+                            <th>Quantidade de Usuários</th> -->
+                          <th>Ação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="perfil : ${adminDashboard.perfis}">
+                          <td th:text="${perfil.getValor}">Administrador</td>
+                          <!-- <td>Acesso total ao sistema</td>
+                            <td>2</td> -->
+                          <td>
+                        <a th:href="@{'/usuarios/' + ${perfil}}" class="btn btn-primary btn-sm" title="Listar">
+                              <i class="fas fa-list"></i>
+                            </a>
+                          
+                          </td>
+
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Logs do Sistema</div>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="tabelaLogs" class="display table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Data/Hora</th>
+                          <th>Ação</th>
+                          <th>Usuário</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>17/01/2024 17:45</td>
+                          <td>Login no sistema</td>
+                          <td>admin@sistema.com</td>
+                        </tr>
+                        <tr>
+                          <td>17/01/2024 15:30</td>
+                          <td>Alteração de perfil</td>
+                          <td>maria.costa@empresa.com</td>
+                        </tr>
+                        <tr>
+                          <td>17/01/2024 14:15</td>
+                          <td>Usuário desativado</td>
+                          <td>carlos.santos@empresa.com</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+
+  <!-- jQuery UI -->
+  <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+  <!-- Datatables -->
+  <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+  <!-- Sweet Alert -->
+  <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+  <!-- Kaiadmin JS -->
+  <script src="assets/js/kaiadmin.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#tabelaUsuarios, #tabelaPerfis, #tabelaLogs').DataTable({
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        }
+      });
+    });
+  </script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- SweetAlert -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const botoes = document.querySelectorAll(".btn-bloquear-usuario");
+
+    botoes.forEach(botao => {
+      botao.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        const url = botao.getAttribute("data-url");
+
+        swal({
+          title: "Tem certeza?",
+          text: "Você realmente deseja bloquear este usuário?",
+          icon: "warning",
+          buttons: ["Cancelar", "Sim, bloquear"],
+          dangerMode: true,
+        }).then((confirmado) => {
+          if (confirmado) {
+            window.location.href = url;
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+</script>
+
+</body>
+
+</html>

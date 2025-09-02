@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Aprovar Solicitação - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <div class="user">
+              <div class="avatar-sm float-left me-2">
+                <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+              </div>
+              <div class="info">
+                <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                  <span>
+                    Diretor
+                    <span class="user-level">Diretor Executivo</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <ul class="nav nav-secondary">
+              <li class="nav-item">
+                <a href="painel-diretor.html">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a href="aprovar-solicitacao.html">
+                  <i class="fas fa-check-double"></i>
+                  <p>Aprovar Solicitações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="configuracoes.html">
+                  <i class="fas fa-cog"></i>
+                  <p>Configurações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Sair</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="content">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Aprovar Solicitação</h4>
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="painel-diretor.html">
+                    <i class="fas fa-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="fas fa-angle-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Aprovar Solicitação</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">Detalhes da Solicitação #001</div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row mb-4">
+                      <div class="col-md-6">
+                        <h5>Informações do Solicitante</h5>
+                        <table class="table table-bordered">
+                          <tr>
+                            <th width="30%">Nome</th>
+                            <td>João Silva</td>
+                          </tr>
+                          <tr>
+                            <th>Setor</th>
+                            <td>TI</td>
+                          </tr>
+                          <tr>
+                            <th>Data da Solicitação</th>
+                            <td>15/01/2024</td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="col-md-6">
+                        <h5>Informações da Vaga</h5>
+                        <table class="table table-bordered">
+                          <tr>
+                            <th width="30%">Cargo</th>
+                            <td>Desenvolvedor Full Stack</td>
+                          </tr>
+                          <tr>
+                            <th>Quantidade</th>
+                            <td>1</td>
+                          </tr>
+                          <tr>
+                            <th>Tipo de Contrato</th>
+                            <td>CLT</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h5>Detalhes da Solicitação</h5>
+                        <table class="table table-bordered">
+                          <tr>
+                            <th width="20%">Urgência</th>
+                            <td><span class="badge bg-danger">Alta</span></td>
+                          </tr>
+                          <tr>
+                            <th>Data Desejada</th>
+                            <td>01/02/2024</td>
+                          </tr>
+                          <tr>
+                            <th>Motivo</th>
+                            <td>Necessidade de reforço na equipe de desenvolvimento devido ao aumento de projetos estratégicos.</td>
+                          </tr>
+                          <tr>
+                            <th>Observações</th>
+                            <td>Profissional com experiência em React e Node.js.</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h5>Parecer do RH</h5>
+                        <div class="alert alert-info">
+                          <p><strong>Data da Análise:</strong> 16/01/2024</p>
+                          <p><strong>Analista:</strong> Maria Oliveira</p>
+                          <p><strong>Parecer:</strong> Solicitação analisada e aprovada pelo RH. Perfil adequado às necessidades da empresa e orçamento previsto para o setor.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <form id="formAprovacao">
+                      <div class="row mb-4">
+                        <div class="col-md-12">
+                          <h5>Decisão</h5>
+                          <div class="form-group">
+                            <div class="selectgroup w-100">
+                              <label class="selectgroup-item">
+                                <input type="radio" name="decisao" value="aprovar" class="selectgroup-input" checked="">
+                                <span class="selectgroup-button">Aprovar</span>
+                              </label>
+                              <label class="selectgroup-item">
+                                <input type="radio" name="decisao" value="recusar" class="selectgroup-input">
+                                <span class="selectgroup-button">Recusar</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-4">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="justificativa">Justificativa da Decisão</label>
+                            <textarea class="form-control" id="justificativa" rows="4" required></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <button type="submit" class="btn btn-primary">Confirmar Decisão</button>
+                          <a href="painel-diretor.html" class="btn btn-danger">Cancelar</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('#formAprovacao').on('submit', function(e) {
+          e.preventDefault();
+          
+          const decisao = $('input[name="decisao"]:checked').val();
+          const justificativa = $('#justificativa').val();
+          
+          if (!justificativa) {
+            swal({
+              title: 'Atenção!',
+              text: 'Por favor, preencha a justificativa da sua decisão.',
+              icon: 'warning',
+              buttons: {
+                confirm: {
+                  text: 'OK',
+                  className: 'btn btn-primary'
+                }
+              }
+            });
+            return;
+          }
+          
+          swal({
+            title: 'Confirmar Decisão',
+            text: `Você está ${decisao === 'aprovar' ? 'aprovando' : 'recusando'} esta solicitação. Deseja continuar?`,
+            icon: 'warning',
+            buttons: {
+              cancel: {
+                text: 'Cancelar',
+                visible: true,
+                className: 'btn btn-danger'
+              },
+              confirm: {
+                text: 'Sim, Confirmar',
+                className: 'btn btn-success'
+              }
+            }
+          }).then((willConfirm) => {
+            if (willConfirm) {
+              swal({
+                title: 'Sucesso!',
+                text: 'Sua decisão foi registrada com sucesso!',
+                icon: 'success',
+                buttons: {
+                  confirm: {
+                    text: 'OK',
+                    className: 'btn btn-success'
+                  }
+                }
+              }).then(() => {
+                window.location.href = 'painel-diretor.html';
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

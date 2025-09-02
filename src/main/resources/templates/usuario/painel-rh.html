@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Painel RH - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+<!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />'
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <div class="user">
+              <div class="avatar-sm float-left me-2">
+                <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+              </div>
+              <div class="info">
+                <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                  <span>
+                    RH
+                    <span class="user-level">Recursos Humanos</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <ul class="nav nav-secondary">
+              <li class="nav-item active">
+                <a href="painel-rh.html">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="avaliar-solicitacao.html">
+                  <i class="fas fa-check-double"></i>
+                  <p>Avaliar Solicitações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="configuracoes.html">
+                  <i class="fas fa-cog"></i>
+                  <p>Configurações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Sair</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="content">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Dashboard RH</h4>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-primary bubble-shadow-small">
+                          <i class="fas fa-file-alt"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ml-3 ml-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Total de Solicitações</p>
+                          <h4 class="card-title" th:text="${dashboard.totalDeSolicitações}">25</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-success bubble-shadow-small">
+                          <i class="fas fa-check-circle"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ml-3 ml-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Aprovadas</p>
+                          <h4 class="card-title" th:text="${dashboard.aprovados}">15</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-warning bubble-shadow-small">
+                          <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ml-3 ml-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Pendentes de Ajuste</p>
+                          <h4 class="card-title" th:text="${dashboard.pendenteDeAjustes}">5</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="card card-stats card-round">
+                  <div class="card-body">
+                    <div class="row align-items-center">
+                      <div class="col-icon">
+                        <div class="icon-big text-center icon-info bubble-shadow-small">
+                          <i class="fas fa-clock"></i>
+                        </div>
+                      </div>
+                      <div class="col col-stats ml-3 ml-sm-0">
+                        <div class="numbers">
+                          <p class="card-category">Em Análise</p>
+                          <h4 class="card-title" th:text="${dashboard.emAnalise}">5</h4>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">Solicitações Recentes</div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table id="tabelaSolicitacoes" class="display table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Tipo</th>
+                            <th>Data</th>
+                            <th>prioridade</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <tr th:each="requisicao : ${dashboard.getRequisicoesRecentes}">
+                            <td th:text="${requisicao.tipoDeSolicitacao.getDescricao()}">001</td>
+                            <td th:text="${requisicao.dataDaCriacao}">TI</td>
+                            <td th:text="${requisicao.prioridade}">15/01/2024</td>
+                            <td ><span class="badge bg-success" th:text="${requisicao.statusDaRequisicao.getDescricao()}">Aprovada</span></td>
+                            <td>
+                              <a href="avaliar-solicitacao.html?id=001" class="btn btn-primary btn-sm">Avaliar</a>
+                            </td>
+                          </tr>
+                   
+                    
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('#tabelaGestores, #tabelaSolicitacoes').DataTable({
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

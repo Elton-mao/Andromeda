@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Novo Recurso de TI - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                <span>
+                  Admin
+                  <span class="user-level">Administrador</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item">
+              <a href="administracao.html">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="configuracoes.html">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.html">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Novo Recurso de TI</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Informações do Recurso</div>
+                </div>
+                <div class="card-body">
+                  <form id="formRecursoTi" th:action="@{/recurso-de-ti/criar}" method="post" th:object="${formulario}"
+                    class="needs-validation" novalidate>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="titulo" class="form-label">Título *</label>
+                          <input type="text" class="form-control" id="titulo" th:field="*{titulo}" required>
+                          <div class="invalid-feedback">
+                            Por favor, insira o título.
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="descricao" class="form-label">Descrição</label>
+                          <textarea class="form-control" id="descricao" th:field="*{descricao}" rows="3"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="categoria" class="form-label">Categoria *</label>
+                          <select class="form-select" id="categoria" required th:field="*{categoria}">
+                            <option value="" selected disabled>Selecione uma categoria</option>
+                            <option th:each="cat : ${categoria}" th:value="${cat.name()}" th:text="${cat.name()}">
+                            </option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Por favor, selecione uma categoria.
+                          </div>
+                        </div>
+                      </div>
+    
+                      <div class="card-action mt-4">
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                        <a th:href="@{/recurso-de-ti/criar}" class="btn btn-secondary">Cancelar</a>
+                      </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+  <script th:src="@{/assets/js/core/popper.min.js}"></script>
+  <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+
+  <!-- jQuery UI -->
+  <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+  <script th:src="@{/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+  <!-- Sweet Alert -->
+  <script th:src="@{/assets/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+  <!-- Kaiadmin JS -->
+  <script th:src="@{/assets/js/kaiadmin.min.js}"></script>
+
+  <script>
+    document.getElementById('formRecursoTi').addEventListener('submit', function (event) {
+      event.preventDefault(); // Impede o envio imediato
+      event.stopPropagation();
+
+      // Validação do formulário
+      const form = this;
+      form.classList.add('was-validated');
+
+      if (form.checkValidity()) {
+        swal({
+          title: 'Confirmar cadastro',
+          text: 'Deseja realmente cadastrar este recurso de TI?',
+          icon: 'warning',
+          buttons: {
+            cancel: {
+              text: 'Cancelar',
+              visible: true,
+              className: 'btn btn-danger',
+              closeModal: true
+            },
+            confirm: {
+              text: 'Sim, cadastrar',
+              value: true,
+              visible: true,
+              className: 'btn btn-success',
+              closeModal: true
+            }
+          }
+        }).then((value) => {
+          if (value) {
+            form.submit(); // Envia o formulário
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Detalhes da Solicitação - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <div class="user">
+              <div class="avatar-sm float-left me-2">
+                <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+              </div>
+              <div class="info">
+                <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                  <span>
+                    Gestor
+                    <span class="user-level">Gerente de Área</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <ul class="nav nav-secondary">
+              <li class="nav-item">
+                <a href="dashboard-gestor.html">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="nova-solicitacao.html">
+                  <i class="fas fa-plus-circle"></i>
+                  <p>Nova Solicitação</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="minhas-solicitacoes.html">
+                  <i class="fas fa-list"></i>
+                  <p>Minhas Solicitações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="configuracoes.html">
+                  <i class="fas fa-cog"></i>
+                  <p>Configurações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Sair</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="content">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Detalhes da Solicitação</h4>
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="dashboard-gestor.html">
+                    <i class="fas fa-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="fas fa-angle-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="minhas-solicitacoes.html">Minhas Solicitações</a>
+                </li>
+                <li class="separator">
+                  <i class="fas fa-angle-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Detalhes</a>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <h4 class="card-title">Solicitação #001</h4>
+                      <span class="badge bg-warning ms-auto">Em Análise</span>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row mb-4">
+                      <div class="col-md-6">
+                        <h6 class="fw-bold">Informações do Solicitante</h6>
+                        <p><strong>Nome:</strong> João Silva</p>
+                        <p><strong>Setor:</strong> TI</p>
+                        <p><strong>Data da Solicitação:</strong> 15/01/2024</p>
+                      </div>
+                      <div class="col-md-6">
+                        <h6 class="fw-bold">Informações da Vaga</h6>
+                        <p><strong>Cargo:</strong> Desenvolvedor Full Stack</p>
+                        <p><strong>Quantidade:</strong> 1</p>
+                        <p><strong>Tipo de Contrato:</strong> CLT</p>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Detalhes da Solicitação</h6>
+                        <p><strong>Nível de Urgência:</strong> <span class="badge bg-danger">Alta</span></p>
+                        <p><strong>Data Desejada para Início:</strong> 01/02/2024</p>
+                        <p><strong>Motivo da Solicitação:</strong></p>
+                        <p class="text-muted">Necessidade de profissional para desenvolvimento de novos projetos e manutenção dos sistemas existentes.</p>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Observações Adicionais</h6>
+                        <p class="text-muted">Preferência por candidatos com experiência em React e Node.js.</p>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Anexos</h6>
+                        <a href="#" class="btn btn-primary btn-sm">
+                          <i class="fas fa-file-pdf"></i> Descrição_Cargo.pdf
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Histórico de Status</h6>
+                        <div class="timeline">
+                          <div class="timeline-item">
+                            <div class="timeline-badge success">
+                              <i class="fas fa-check"></i>
+                            </div>
+                            <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                <h6 class="timeline-title">Solicitação Criada</h6>
+                                <p><small class="text-muted"><i class="fas fa-clock"></i> 15/01/2024 10:30</small></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="timeline-item">
+                            <div class="timeline-badge warning">
+                              <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="timeline-panel">
+                              <div class="timeline-heading">
+                                <h6 class="timeline-title">Em Análise pelo RH</h6>
+                                <p><small class="text-muted"><i class="fas fa-clock"></i> 15/01/2024 14:20</small></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Seção de Comentários -->
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Comentários</h6>
+                        <div class="comments-section">
+                          <div class="comment-box mb-3">
+                            <div class="d-flex align-items-start">
+                              <div class="avatar-sm me-3">
+                                <img src="assets/img/profile2.jpg" alt="RH" class="avatar-img rounded-circle">
+                              </div>
+                              <div class="comment-content">
+                                <h6 class="mb-1">Maria Santos (RH)</h6>
+                                <p class="text-muted mb-1">Solicitação em análise. Entraremos em contato caso necessário.</p>
+                                <small class="text-muted">15/01/2024 14:20</small>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <!-- Formulário de Novo Comentário -->
+                          <div class="new-comment mt-4">
+                            <form>
+                              <div class="form-group">
+                                <textarea class="form-control" rows="3" placeholder="Adicione um comentário..."></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-primary mt-2">Enviar Comentário</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="btn btn-danger" onclick="window.history.back()">
+                      <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Moment JS -->
+    <script src="assets/js/plugin/moment/moment.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+  </body>
+</html>

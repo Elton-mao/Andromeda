@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Avaliar Solicitação - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <div class="user">
+              <div class="avatar-sm float-left me-2">
+                <img src="assets/img/profile2.jpg" alt="..." class="avatar-img rounded-circle">
+              </div>
+              <div class="info">
+                <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                  <span>
+                    RH
+                    <span class="user-level">Analista de RH</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <ul class="nav nav-secondary">
+              <li class="nav-item">
+                <a href="painel-rh.html">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a href="avaliar-solicitacao.html">
+                  <i class="fas fa-check-circle"></i>
+                  <p>Avaliar Solicitações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="configuracoes.html">
+                  <i class="fas fa-cog"></i>
+                  <p>Configurações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Sair</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="content">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Avaliar Solicitação</h4>
+              <ul class="breadcrumbs">
+                <li class="nav-home">
+                  <a href="painel-rh.html">
+                    <i class="fas fa-home"></i>
+                  </a>
+                </li>
+                <li class="separator">
+                  <i class="fas fa-angle-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Avaliar Solicitação #001</a>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <h4 class="card-title">Detalhes da Solicitação #001</h4>
+                      <span class="badge bg-warning ms-auto">Pendente Análise</span>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <!-- Informações da Solicitação -->
+                    <div class="row mb-4">
+                      <div class="col-md-6">
+                        <h6 class="fw-bold">Informações do Solicitante</h6>
+                        <p><strong>Nome:</strong> João Silva</p>
+                        <p><strong>Setor:</strong> TI</p>
+                        <p><strong>Data da Solicitação:</strong> 15/01/2024</p>
+                      </div>
+                      <div class="col-md-6">
+                        <h6 class="fw-bold">Informações da Vaga</h6>
+                        <p><strong>Cargo:</strong> Desenvolvedor Full Stack</p>
+                        <p><strong>Quantidade:</strong> 1</p>
+                        <p><strong>Tipo de Contrato:</strong> CLT</p>
+                      </div>
+                    </div>
+
+                    <!-- Detalhes da Solicitação -->
+                    <div class="row mb-4">
+                      <div class="col-md-12">
+                        <h6 class="fw-bold">Detalhes da Solicitação</h6>
+                        <p><strong>Nível de Urgência:</strong> <span class="badge bg-danger">Alta</span></p>
+                        <p><strong>Data Desejada para Início:</strong> 01/02/2024</p>
+                        <p><strong>Motivo da Solicitação:</strong></p>
+                        <p class="text-muted">Necessidade de profissional para desenvolvimento de novos projetos e manutenção dos sistemas existentes.</p>
+                      </div>
+                    </div>
+
+                    <!-- Formulário de Avaliação -->
+                    <form id="formAvaliacao">
+                      <div class="row mb-4">
+                        <div class="col-md-12">
+                          <h6 class="fw-bold">Avaliação do RH</h6>
+                          <div class="form-group">
+                            <label>Decisão*</label>
+                            <select class="form-control" id="decisaoRH" required>
+                              <option value="">Selecione uma opção</option>
+                              <option value="encaminhar">Encaminhar para Diretor</option>
+                              <option value="ajustes">Solicitar Ajustes</option>
+                              <option value="recusar">Recusar Solicitação</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mb-4">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Parecer do RH*</label>
+                            <textarea class="form-control" id="parecerRH" rows="4" required placeholder="Insira seu parecer sobre a solicitação..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Campos específicos para cada decisão -->
+                      <div id="camposAjustes" class="row mb-4" style="display: none;">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Ajustes Necessários*</label>
+                            <textarea class="form-control" id="ajustesNecessarios" rows="3" placeholder="Descreva os ajustes necessários..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div id="camposEncaminhar" class="row mb-4" style="display: none;">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Observações para o Diretor</label>
+                            <textarea class="form-control" id="obsParaDiretor" rows="3" placeholder="Observações importantes para a análise do diretor..."></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card-action">
+                        <button type="submit" class="btn btn-success">Confirmar Avaliação</button>
+                        <button type="button" class="btn btn-danger" onclick="window.history.back()">Cancelar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        // Mostrar/ocultar campos específicos baseado na decisão
+        $('#decisaoRH').change(function() {
+          const decisao = $(this).val();
+          $('#camposAjustes').hide();
+          $('#camposEncaminhar').hide();
+          
+          if (decisao === 'ajustes') {
+            $('#camposAjustes').show();
+            $('#ajustesNecessarios').prop('required', true);
+          } else if (decisao === 'encaminhar') {
+            $('#camposEncaminhar').show();
+          }
+        });
+
+        // Submissão do formulário
+        $('#formAvaliacao').on('submit', function(e) {
+          e.preventDefault();
+          
+          swal({
+            title: 'Avaliação Concluída!',
+            text: 'A solicitação foi processada com sucesso.',
+            icon: 'success',
+            buttons: {
+              confirm: {
+                text: 'OK',
+                value: true,
+                visible: true,
+                className: 'btn btn-success',
+                closeModal: true
+              }
+            }
+          }).then(function() {
+            window.location.href = 'painel-rh.html';
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

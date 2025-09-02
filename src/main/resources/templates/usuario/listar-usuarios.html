@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Administração - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script th:src="@{/assets/js/plugin/webfont/webfont.min.js}"></script>
+  <script th:inline="javascript">
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons"
+        ],
+        urls: ["[[${'/assets/css/fonts.min.css'}]]"]
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      }
+    });
+  </script>
+
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />
+
+
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img th:src="@{/assets/img/profile.jpg}" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" th:href="@{#collapseExample}" aria-expanded="true">
+                <span>
+                  Admin
+                  <span class="user-level">Administrador</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item active">
+              <a href="administracao.html">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="configuracoes.html">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="logout.html">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Administração do Sistema</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                  <div class="card-title">Gerenciamento de Usuários</div>
+                  <a th:href="@{/usuarios}" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Usuário</a>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="tabelaUsuarios" class="display table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th>Nome</th>
+                          <th>E-mail</th>
+                          <th>Perfil</th>
+                          <th>Status</th>
+                          <th>Ações</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="usuario : ${usuario}">
+                          <td th:text="${usuario.nomeCompleto}">João Silva</td>
+                          <td th:text="${usuario.email}">joao.silva@empresa.com</td>
+                          <td th:text="${usuario.perfilDeAcesso}">Gestor</td>
+                          <td>
+                            <span class="badge"
+                              th:classappend="${usuario.statusDoUsuario == 'ATIVO'} ? 'bg-danger ' : 'bg-success '"
+                              th:text="${usuario.statusDoUsuario}">
+                            </span>
+                          </td>
+                          <td>
+                            <a th:href="@{'/usuarios/atualizar/' + ${usuario.id}}" class="btn btn-warning btn-sm">
+                              <i class="fas fa-edit"></i>
+                            </a> <a href="#" class="btn btn-danger btn-sm btn-bloquear-usuario"
+                              th:attr="data-url='/usuarios/bloquear/' + ${usuario.id} + '/BLOQUEADO'"
+                              data-bs-toggle="tooltip" data-bs-placement="top" title="Bloquear usuário">
+                              <i class="fas fa-user-slash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <!-- Core JS Files -->
+          <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+          <script th:src="@{/assets/js/core/popper.min.js}"></script>
+          <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+
+          <!-- jQuery UI -->
+          <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+          <script th:src="@{/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+
+          <!-- jQuery Scrollbar -->
+          <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+          <!-- Datatables -->
+          <script th:src="@{/assets/js/plugin/datatables/datatables.min.js}"></script>
+
+          <!-- Sweet Alert -->
+          <script th:src="@{/assets/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+          <!-- Kaiadmin JS -->
+          <script th:src="@{/assets/js/kaiadmin.min.js}"></script>
+
+          <script>
+            $(document).ready(function () {
+              $('#tabelaUsuarios, #tabelaPerfis, #tabelaLogs').DataTable({
+                "language": {
+                  "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+                }
+              });
+            });
+          </script>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              const botoes = document.querySelectorAll(".btn-bloquear-usuario");
+
+              botoes.forEach(botao => {
+                botao.addEventListener("click", function (event) {
+                  event.preventDefault();
+
+                  const url = botao.getAttribute("data-url");
+
+                  swal({
+                    title: "Tem certeza?",
+                    text: "Você realmente deseja bloquear este usuário?",
+                    icon: "warning",
+                    buttons: ["Cancelar", "Sim, bloquear"],
+                    dangerMode: true,
+                  }).then((confirmado) => {
+                    if (confirmado) {
+                      window.location.href = url;
+                    }
+                  });
+                });
+              });
+            });
+          </script>
+
+</body>
+
+</html>

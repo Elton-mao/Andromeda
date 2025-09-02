@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Minhas Solicitações - Sistema de Solicitação de Funcionários</title>
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="icon" href="assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+
+    <!-- Fonts and icons -->
+    <script src="assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+      WebFont.load({
+        google: { families: ["Public Sans:300,400,500,600,700"] },
+        custom: {
+          families: [
+            "Font Awesome 5 Solid",
+            "Font Awesome 5 Regular",
+            "Font Awesome 5 Brands",
+            "simple-line-icons",
+          ],
+          urls: ["assets/css/fonts.min.css"],
+        },
+        active: function () {
+          sessionStorage.fonts = true;
+        },
+      });
+    </script>
+
+    <!-- CSS Files -->
+      <!-- CSS Files -->
+    <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />
+</head>
+  <body>
+    <div class="wrapper">
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <div class="user">
+              <div class="avatar-sm float-left me-2">
+                <img th:src="@{/assets/img/profile.jpg}"  alt="..." class="avatar-img rounded-circle">
+              </div>
+              <div class="info">
+                <a data-bs-toggle="collapse" href="#collapseExample" aria-expanded="true">
+                  <span>
+                    Gestor
+                    <span class="user-level">Gerente de Área</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <ul class="nav nav-secondary">
+              <li class="nav-item">
+                <a href="dashboard-gestor.html">
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="nova-solicitacao.html">
+                  <i class="fas fa-plus-circle"></i>
+                  <p>Nova Solicitação</p>
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a href="minhas-solicitacoes.html">
+                  <i class="fas fa-list"></i>
+                  <p>Minhas Solicitações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="configuracoes.html">
+                  <i class="fas fa-cog"></i>
+                  <p>Configurações</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="logout.html">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <p>Sair</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <div class="main-panel">
+        <div class="content">
+          <div class="page-inner">
+            <div class="page-header">
+              <h4 class="page-title">Minhas Solicitações</h4>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <div class="d-flex align-items-center">
+                      <h4 class="card-title">Lista de Solicitações</h4>
+                      <a href="nova-solicitacao.html" class="btn btn-primary btn-round ms-auto">
+                        <i class="fa fa-plus"></i>
+                        Nova Solicitação
+                      </a>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table id="tabelaSolicitacoes" class="display table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th>Tipo de Requisição</th> 
+                            <th>Data Solicitação</th> 
+                            <th>Urgência</th> 
+                            <th>Status</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr th:each="requisicao : ${requisicoes}">
+                            <td th:text="${requisicao.tipoDeSolicitacao.getDescricao()}">001</td>
+                            <td th:text="${requisicao.dataDaCriacao}">TI</td>
+                            <td th:text="${requisicao.prioridade.getDescricao()}">15/01/2024</td>
+                            <td th:text="${requisicao.statusDaRequisicao.getDescricao()}">01/02/2024</td>
+                            <td>
+                              <div class="form-button-action">
+                                <a href="detalhes-solicitacao.html?id=001" class="btn btn-link btn-primary" data-toggle="tooltip" title="Ver Detalhes">
+                                  <i class="fa fa-eye"></i>
+                                </a>
+                              </div>
+                            </td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="assets/js/kaiadmin.min.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        $('#tabelaSolicitacoes').DataTable({
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+          }
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
+      });
+    </script>
+  </body>
+</html>

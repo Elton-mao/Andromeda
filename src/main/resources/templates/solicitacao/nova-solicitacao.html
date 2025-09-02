@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Nova Solicitação - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script th:src="@{/assets/js/plugin/webfont/webfont.min.js}"></script>
+
+
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img th:src="@{/assets/img/profile.jpg}" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" th:href="@{#collapseExample}" aria-expanded="true">
+                <span>
+                  Gestor
+                  <span class="user-level">Gerente de Área</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item">
+              <a th:href="@{/dashboard-gestor}">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a th:href="@{/nova-solicitacao}">
+                <i class="fas fa-plus-circle"></i>
+                <p>Nova Solicitação</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/minhas-solicitacoes}">
+                <i class="fas fa-list"></i>
+                <p>Minhas Solicitações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/configuracoes}">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Nova Solicitação de Funcionário</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Formulário de Solicitação</div>
+                </div>
+                <div class="card-body">
+                  <form id="formSolicitacao" th:action="@{/requisicao/criar}" th:object="${requisicaoDepessoal}"
+                    method="post">
+                    <!-- Campos da Requisição de Pessoal -->
+                    <div class="card mb-4">
+                      <div class="card-header">
+                        <h5 class="card-title">Requisição de Pessoal</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="dataLimiteDaContracao">Data Limite da Contratação*</label>
+                              <input type="date" class="form-control" id="dataLimiteDaContracao"
+                                th:field="*{dataLimiteDaContracao}" required>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="quantidadeDeVagas">Quantidade de Vagas*</label>
+                              <input type="number" class="form-control" id="quantidadeDeVagas" min="1" max="5"
+                                th:field="*{quantidadeDeVagas}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="centrodecusto">Centro De Custo*</label>
+                              <select class="form-control" id="centrodecusto" th:field="*{centroDeCustoId}" required>
+                                <option value="">Selecione o Centro de Custo</option>
+                                <option th:each="centroDeCusto : ${centroDeCusto}" th:value="${centroDeCusto.id}"
+                                  th:text="${centroDeCusto.nome}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="solicitante">Solicitante*</label>
+                              <select class="form-control" id="solicitante" name="solicitante.id"
+                                th:field="*{solicitante}" required>
+                                <option value="">Selecione o solicitante</option>
+                                <option th:each="solicitante : ${requisitantes}" th:value="${solicitante.id}"
+                                  th:text="${solicitante.nomeCompleto}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- Subformulário - Vaga -->
+                    <div class="card mb-4">
+                      <div class="card-header">
+                        <h5 class="card-title">Informações da Vaga</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="cargo">Cargo*</label>
+                              <select class="form-control" id="cargo" name="cargo.id" th:field="*{vaga.cargoId}"
+                                required>
+                                <option value="">Selecione o Cargo</option>
+                                <option th:each="cargo : ${cargos}" th:value="${cargo.id}"
+                                  th:text="${cargo.tituloDoCargo}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="motivoDaRequisicao">Motivo Da Contratação*</label>
+                              <select class="form-control" id="motivoDaRequisicao" name="motivoDaRequisicao"
+                                th:field="*{motivoDaRequisicao}" required>
+                                <option value="">Selecione...</option>
+                                <option th:each="motivo : ${motivoDaRequisicao}" th:value="${motivo}"
+                                  th:text="${motivo.getDescricao}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="tipoDeContrato">Tipo de Contrato*</label>
+                              <select class="form-control" id="tipoDeContrato" th:field="*{vaga.tipoDeContrato}"
+                                required>
+                                <option value="">Selecione o tipo</option>
+                                <option th:each="tipo : ${contrato}" th:value="${tipo}" th:text="${tipo.getValor()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="turnoDeTrabalho">Turno de Trabalho*</label>
+                              <select class="form-control" id="turnoDeTrabalho" th:field="*{vaga.turnoDeTrabalho}"
+                                required>
+                                <option value="">Selecione o turno</option>
+                                <option th:each="turno : ${turnos}" th:value="${turno}" th:text="${turno.getValor()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="escolaridade">Escolaridade*</label>
+                              <select class="form-control" id="escolaridade" th:field="*{vaga.escolaridade}" required>
+                                <option value="">Selecione a escolaridade</option>
+                                <option th:each="escolaridade : ${escolaridade}" th:value="${escolaridade}"
+                                  th:text="${escolaridade.getValor()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="status">Prioridade*</label>
+                              <select class="form-control" id="status" th:field="*{prioridade}" required>
+                                <option value="">Selecione...</option>
+                                <option th:each="prioridade : ${prioridade}" th:value="${prioridade}"
+                                  th:text="${prioridade.getDescricao()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="isalubridade">Insalubridade*</label>
+                              <select class="form-control" id="isalubridade" name="isalubridade"
+                                th:field="*{vaga.isalubridade}" required>
+                                <option value="">Selecione...</option>
+                                <option th:each="insalubridade : ${isalubridade}" th:value="${insalubridade}"
+                                  th:text="${insalubridade.getDescricao()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="posRequerida">Pós Graduação Requerida*</label>
+                              <select class="form-control" id="posRequerida" name="posRequerida"
+                                th:field="*{vaga.posRequerida}" required>
+                                <option value="">Selecione...</option>
+                                <option th:each="posRequerida : ${posRequerida}" th:value="${posRequerida}"
+                                  th:text="${posRequerida.getDescricao()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for="competenciasTecnicas">Descreva as Competências Técnicas desejadas</label>
+                              <input type="text" class="form-control" id="competenciasTecnicas"
+                                th:field="*{vaga.competenciasTecnicas}" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="cnhRequerida">CNH Requerida</label>
+                              <select class="form-control" id="cnhRequerida" name="cnhRequerida"
+                                th:field="*{vaga.cnhRequerida}" required>
+                                <option value="">Selecione...</option>
+                                <option th:each="cnhRequerida : ${cnhRequerida}" th:value="${cnhRequerida}"
+                                  th:text="${cnhRequerida.getDescricao()}">
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <input type="hidden" id="dataCriacao">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- CARD: Recursos de TI -->
+                    <div class="card mb-4" id="card-recursos-ti">
+                      <div class="card-header d-flex align-items-center justify-content-between">
+                        <h5 class="card-title mb-0">Recursos de TI</h5>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" id="toggleRecursosTI">
+                          <label class="form-check-label" for="toggleRecursosTI">Solicitar</label>
+                        </div>
+                      </div>
+
+                      <div class="card-body" id="recursosTISection" style="display:none;">
+                        <p class="mb-2">Selecione os recursos necessários:</p>
+                        <div id="listaRecursos" class="row g-2">
+                            <div th:each="r : ${recursos}" class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input recurso-check"
+                                           type="checkbox"
+                                           th:id="'recurso-' + ${r.id}"
+                                           th:data-id="${r.id}"
+                                           th:data-nome="${r.titulo}">
+                                    <label class="form-check-label" th:for="'recurso-' + ${r.id}" th:text="${r.titulo}"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-3">
+                        <p class="mb-1">Recursos selecionados:</p>
+                        <ul id="recursosSelecionados" class="list-group small"></ul>
+
+                        <!-- Container for hidden inputs that will be submitted with the form -->
+                        <div id="hiddenInputsRecursos"></div>
+
+                        <button type="button" id="btnLimparRecursos" class="btn btn-outline-secondary btn-sm mt-2">
+                          Limpar seleção
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="card-action">
+                      <button type="submit" class="btn btn-success">Enviar Solicitação</button>
+                      <button type="reset" class="btn btn-danger">Limpar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+  <script th:src="@{/assets/js/core/popper.min.js}"></script>
+  <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+
+  <!-- jQuery UI -->
+  <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+  <script th:src="@{/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+  <!-- Moment JS -->
+  <script th:src="@{/assets/js/plugin/moment/moment.min.js}"></script>
+
+  <!-- Bootstrap Notify -->
+  <script th:src="@{/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+  <!-- Sweet Alert -->
+  <script th:src="@{/assets/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+  <!-- Kaiadmin JS -->
+  <script th:src="@{/assets/js/kaiadmin.min.js}"></script>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('toggleRecursosTI');
+      const section = document.getElementById('recursosTISection');
+      const listaContainer = document.getElementById('listaRecursos');
+      const selecionadosUl = document.getElementById('recursosSelecionados');
+      const hiddenContainer = document.getElementById('hiddenInputsRecursos');
+      const btnLimpar = document.getElementById('btnLimparRecursos');
+
+      // Show/hide section
+      toggle?.addEventListener('change', () => {
+        section.style.display = toggle.checked ? 'block' : 'none';
+        if (!toggle.checked) {
+            // Clear selection when hiding
+            estado.clear();
+            document.querySelectorAll('.recurso-check').forEach(chk => (chk.checked = false));
+            renderSelecionados();
+            syncHiddenInputs();
+        }
+      });
+
+      // Selected state: Map<id, {id, nome}>
+      const estado = new Map();
+
+      function syncHiddenInputs() {
+        hiddenContainer.innerHTML = ''; // Clear previous inputs
+        Array.from(estado.values()).forEach(r => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'requisicaoDeTi.recursosDeTi';
+          input.value = r.id;
+          hiddenContainer.appendChild(input);
+        });
+      }
+
+      function renderSelecionados() {
+        selecionadosUl.innerHTML = '';
+        if (estado.size === 0) {
+          selecionadosUl.innerHTML = '<li class="list-group-item text-muted">Nenhum recurso selecionado.</li>';
+          return;
+        }
+        Array.from(estado.values()).forEach(r => {
+          const li = document.createElement('li');
+          li.className = 'list-group-item d-flex justify-content-between align-items-center';
+          li.textContent = r.nome;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn btn-sm btn-outline-danger';
+          btn.textContent = 'Remover';
+          btn.addEventListener('click', () => {
+            estado.delete(r.id);
+            const checkbox = document.getElementById(`recurso-${r.id}`);
+            if (checkbox) {
+                checkbox.checked = false;
+            }
+            renderSelecionados();
+            syncHiddenInputs();
+          });
+          li.appendChild(btn);
+          selecionadosUl.appendChild(li);
+        });
+      }
+
+      function onCheckboxChange(e) {
+        const chk = e.target;
+        if (!chk.classList.contains('recurso-check')) return;
+        
+        const id = Number(chk.dataset.id);
+        const nome = chk.dataset.nome;
+
+        if (chk.checked) {
+          estado.set(id, { id, nome });
+        } else {
+          estado.delete(id);
+        }
+        renderSelecionados();
+        syncHiddenInputs();
+      }
+
+      btnLimpar?.addEventListener('click', () => {
+        estado.clear();
+        document.querySelectorAll('.recurso-check').forEach(chk => (chk.checked = false));
+        renderSelecionados();
+        syncHiddenInputs();
+      });
+
+      // Init
+      if (listaContainer) {
+        listaContainer.addEventListener('change', onCheckboxChange);
+      }
+      renderSelecionados(); // Initial render for the "empty" state
+    })();
+
+    // SweetAlert for form submission
+    $(document).ready(function () {
+        $('#formSolicitacao').on('submit', function (e) {
+            e.preventDefault();
+            var form = this;
+
+            swal({
+                title: 'Solicitação Enviada!',
+                text: 'Sua solicitação foi enviada com sucesso e está em análise.',
+                icon: 'success',
+                buttons: {
+                    confirm: {
+                        text: 'OK',
+                        value: true,
+                        visible: true,
+                        className: 'btn btn-success',
+                        closeModal: true
+                    }
+                }
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    form.submit();
+                }
+            });
+        });
+    });
+  </script>
+</body>
+
+</html>

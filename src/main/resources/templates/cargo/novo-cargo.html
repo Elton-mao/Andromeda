@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Novo Cargo - Sistema de Solicitação de Funcionários</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" th:href="@{/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+  <!-- Fonts and icons -->
+  <script th:src="@{/assets/js/plugin/webfont/webfont.min.js}"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["assets/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/plugins.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/kaiadmin.min.css}" />
+  <link rel="stylesheet" th:href="@{/assets/css/fonts.min.css}" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper scrollbar scrollbar-inner">
+        <div class="sidebar-content">
+          <div class="user">
+            <div class="avatar-sm float-left me-2">
+              <img th:src="@{/assets/img/profile.jpg}" alt="..." class="avatar-img rounded-circle">
+            </div>
+            <div class="info">
+              <a data-bs-toggle="collapse" th:href="@{#collapseExample}" aria-expanded="true">
+                <span>
+                  Gestor
+                  <span class="user-level">Gerente de Área</span>
+                </span>
+              </a>
+            </div>
+          </div>
+          <ul class="nav nav-secondary">
+            <li class="nav-item">
+              <a th:href="@{/dashboard-gestor}">
+                <i class="fas fa-home"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/nova-solicitacao}">
+                <i class="fas fa-plus-circle"></i>
+                <p>Nova Solicitação</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/minhas-solicitacoes}">
+                <i class="fas fa-list"></i>
+                <p>Minhas Solicitações</p>
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a th:href="@{/cargos}">
+                <i class="fas fa-briefcase"></i>
+                <p>Cargos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/configuracoes}">
+                <i class="fas fa-cog"></i>
+                <p>Configurações</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/logout}">
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Sair</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <div class="content">
+        <div class="page-inner">
+          <div class="page-header">
+            <h4 class="page-title">Novo Cargo</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Formulário de Cadastro de Cargo</div>
+                </div>
+                <div class="card-body">
+                  <form id="formCargo" th:action="@{/cargos/criar}" th:object="${cargoFormulario}" method="post" class="needs-validation" novalidate>
+                    <div class="card mb-4">
+                      <div class="card-header">
+                        <h5 class="card-title">Informações do Cargo</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="tituloDoCargo">Título do Cargo*</label>
+                              <input type="text" class="form-control" id="tituloDoCargo" th:field="*{tituloDoCargo}" required>
+                              <div class="invalid-feedback">
+                                Por favor, informe o título do cargo.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for="salario">Salário*</label>
+                              <input type="number" step="0.01" min="0" class="form-control" id="salario" th:field="*{salario}" required>
+                              <div class="invalid-feedback">
+                                Por favor, informe o salário.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-action text-center mt-3">
+                      <button type="submit" class="btn btn-primary btn-lg mx-2">Salvar</button>
+                      <a th:href="@{/cargos}" class="btn btn-secondary btn-lg mx-2">Cancelar</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--   Core JS Files   -->
+  <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+  <script th:src="@{/assets/js/core/popper.min.js}"></script>
+  <script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+
+  <!-- jQuery UI -->
+  <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+  <script th:src="@{/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js}"></script>
+
+  <!-- jQuery Scrollbar -->
+  <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+  <!-- Kaiadmin JS -->
+  <script th:src="@{/assets/js/kaiadmin.min.js}"></script>
+
+  <script>
+    // Ativa a validação do Bootstrap
+    (function () {
+      'use strict';
+      
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation');
+      
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+</body>
+
+</html>
